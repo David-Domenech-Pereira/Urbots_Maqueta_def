@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="93dp"
+        android:src="@drawable/logourbots" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="410dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="53dp"
+            android:layout_marginLeft="53dp"
+            android:layout_marginEnd="59dp"
+            android:layout_marginRight="59dp"
+            android:layout_marginBottom="106dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/InteractuarPanells"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:text="Solar"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/InteractuarEolica"
+                android:layout_width="match_parent"
+                android:layout_height="95dp"
+                android:text="eolica"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/InteractuarNuclear"
+                android:layout_width="match_parent"
+                android:layout_height="86dp"
+                android:text="Nuclear"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/InteractuarCiutat"
+                android:layout_width="match_parent"
+                android:layout_height="101dp"
+                android:text="ciutat/industria"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/ConfigurarMaqueta"
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            android:src="@android:drawable/ic_menu_preferences" />
+
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_manage" />
+
+</LinearLayout>
