@@ -17,7 +17,8 @@ public class InteractuarPanells extends ComponentActivity {
         setContentView(R.layout.interactuar_panells);
         LinearLayout container = findViewById(R.id.container);
         Solar element = Solar.getsolar(); //cogemos la solar de la BBDD
-        for (int i = 0; i < element.getElements().length; i++) {
+        //Sólo se muestran la cantidad activa
+        for (int i = 0; i < element.getSizeElements(); i++) {
             Button button = new Button(this);
             button.setText("Botón " + i);
 
