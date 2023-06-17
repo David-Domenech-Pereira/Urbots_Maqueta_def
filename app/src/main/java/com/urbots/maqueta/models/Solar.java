@@ -10,8 +10,8 @@ public class Solar extends  ElementCiutat{
         this.posicio = posicio;
 
     }
-    public static getsolar(){
+    public static Solar getsolar(){
        //TODO read from DB
-        return new Solar()
+        return new Solar("192.168.0.10",0,40);
     }
 }

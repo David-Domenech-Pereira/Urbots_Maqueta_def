@@ -4,4 +4,9 @@ public class ElementInteractuar {
     ElementCiutat ciutat;
     boolean potEncendre;
     boolean enabled;
+    public  ElementInteractuar(ElementCiutat ciutat, boolean potEncendre, boolean enabled){
+        this.ciutat = ciutat;
+        this.potEncendre = potEncendre;
+        this.enabled = enabled;
+    }
 }

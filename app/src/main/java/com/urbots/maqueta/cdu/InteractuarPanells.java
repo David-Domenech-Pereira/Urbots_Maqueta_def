@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import androidx.activity.ComponentActivity;
 
 import com.urbots.maqueta.R;
+import com.urbots.maqueta.models.Solar;
 
 public class InteractuarPanells extends ComponentActivity {
     @Override
@@ -15,8 +16,8 @@ public class InteractuarPanells extends ComponentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.interactuar_panells);
         LinearLayout container = findViewById(R.id.container);
-
-        for (int i = 0; i < 5; i++) {
+        Solar element = Solar.getsolar(); //cogemos la solar de la BBDD
+        for (int i = 0; i < element.getElements().length; i++) {
             Button button = new Button(this);
             button.setText("Botón " + i);
 
