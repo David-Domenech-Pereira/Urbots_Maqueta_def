@@ -14,4 +14,13 @@ public class Solar extends  ElementCiutat{
        //TODO read from DB
         return new Solar("192.168.0.10",0,40);
     }
+
+
+    public void setPosicio(int i) {
+        posicio = i;
+    }
+
+    public int getPosicio() {
+        return  posicio;
+    }
 }

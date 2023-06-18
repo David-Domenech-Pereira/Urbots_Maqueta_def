@@ -9,4 +9,12 @@ public class ElementInteractuar {
         this.potEncendre = potEncendre;
         this.enabled = enabled;
     }
+
+    public void setEnabled(boolean isChecked) {
+        enabled=isChecked;
+    }
+
+    public boolean getEnabled() {
+        return  enabled;
+    }
 }
