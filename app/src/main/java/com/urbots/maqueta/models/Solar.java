@@ -18,9 +18,21 @@ public class Solar extends  ElementCiutat{
 
     public void setPosicio(int i) {
         posicio = i;
+        sendM();
     }
 
     public int getPosicio() {
         return  posicio;
+    }
+
+    @Override
+    public String generateFrame() {
+        String frame = "S|"; //comença amb 0
+        frame += getFrameEnabled()+"|"; //posem els enabled
+        //Posem 5 cops el número
+        for(int i = 0; i <5; i++){
+            frame += posicio+"|";
+        }
+        return  frame;
     }
 }

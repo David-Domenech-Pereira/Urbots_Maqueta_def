@@ -6,4 +6,9 @@ public class Nuclear extends  ElementCiutat{
     public Nuclear(String ip, float energia) {
         super(ip, energia);
     }
+
+    @Override
+    public String generateFrame() {
+        return null;
+    }
 }

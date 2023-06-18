@@ -7,4 +7,9 @@ public class Eolica extends  ElementCiutat{
     public Eolica(String ip, float energia) {
         super(ip, energia);
     }
+
+    @Override
+    public String generateFrame() {
+        return null;
+    }
 }
