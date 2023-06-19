@@ -11,4 +11,19 @@ public class Nuclear extends  ElementCiutat{
     public String generateFrame() {
         return null;
     }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void save() {
+
+    }
+
+    @Override
+    public void reclaculateEnergy() {
+
+    }
 }

@@ -1,12 +1,18 @@
 package com.urbots.maqueta.models;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 
 public abstract class ElementCiutat {
+    protected static SQLiteDatabase database;
     String ip;
-    float energia;
+    protected float energia;
     ElementInteractuar elements[]; //TODO Seria millor implementar una llista dinàmica (sobre un hashmap) amb els actius
     int elements_num;
     public  ElementCiutat(String ip, float energia){
@@ -17,13 +23,28 @@ public abstract class ElementCiutat {
     }
     public void loadElements(){
         //TODO Carrega els elements de la BBDD
-        //TODO Borrar aquestes carregues temporals
-        elements[0] = new ElementInteractuar(this,true,true);
-        elements[1]= new ElementInteractuar(this,true,true);
-        elements[2]= new ElementInteractuar(this,true,true);
-        elements[3]= new ElementInteractuar(this,true,true);
+        String selection = "ciutat = ?";
+        String[] selectionArgs = {ip};
+        String[] projection = {"id","potEncendre", "enabled"};
+        Cursor cursor = database.query("ElementCiutat", projection, selection, selectionArgs, null, null, null);
+        int i = 0;
+        elements_num=0;
+        // Procesar el resultado de la consulta
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
 
-        elements_num = 4;
+                boolean potEncendre = cursor.getInt(cursor.getColumnIndex("potEncendre"))==1; //si és 1 está encés
+                boolean enabled = cursor.getInt(cursor.getColumnIndex("enabled"))==1; //si és 1 está encés
+                int id = cursor.getInt(cursor.getColumnIndex("id"));
+                // Procesar los valores recuperados de la consulta
+                elements[i] = new ElementInteractuar(id,this,potEncendre,enabled);
+                i++;
+                elements_num++;
+            } while (cursor.moveToNext());
+
+            cursor.close();
+        }
+
     }
     public  int getSizeElements(){
         return  elements_num;
@@ -33,6 +54,7 @@ public abstract class ElementCiutat {
     }
     public void setStatus(boolean isChecked, int i) {
         elements[i].setEnabled(isChecked);
+        reclaculateEnergy();
         sendM();
     }
     public String getFrameEnabled(){
@@ -78,4 +100,30 @@ public abstract class ElementCiutat {
     public void sendFrame(String frame){
         new UDPSenderTask(ip,frame).execute();
     }
+    /**
+     * Método para poner la BBDD estática a todos los elementos
+     * @param db BBDD a poner
+     */
+    public static void setDB(SQLiteDatabase db){
+        database=db; //ponemos la BBDD
+    }
+
+    /**
+     * Método que actualiza la BBDD
+     */
+    public abstract void update();
+
+    /**
+     * Método que hace un insert en la BBDD
+     */
+    public abstract void save();
+
+    /**
+     * Acció que recalcula la Energia
+     */
+    public abstract void reclaculateEnergy();
+    public String getIP(){
+        return  ip;
+    }
+
 }
