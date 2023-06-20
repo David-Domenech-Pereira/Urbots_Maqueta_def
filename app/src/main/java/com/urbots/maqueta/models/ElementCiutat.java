@@ -10,6 +10,7 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
 public abstract class ElementCiutat {
+    protected int num_enabled; //Cantidad de elementos encendidos
     protected static SQLiteDatabase database;
     String ip;
     protected float energia;
@@ -19,6 +20,7 @@ public abstract class ElementCiutat {
         this.ip = ip;
         this.energia = energia;
         elements = new ElementInteractuar[5];
+        num_enabled = 0; //al principio no hay ninguno encendido
         loadElements();
     }
     public void loadElements(){
@@ -39,6 +41,7 @@ public abstract class ElementCiutat {
                 // Procesar los valores recuperados de la consulta
                 elements[i] = new ElementInteractuar(id,this,potEncendre,enabled);
                 i++;
+                if(enabled) num_enabled++;
                 elements_num++;
             } while (cursor.moveToNext());
 
@@ -53,6 +56,9 @@ public abstract class ElementCiutat {
         return  elements;
     }
     public void setStatus(boolean isChecked, int i) {
+        //Si lo encendemos lo contamos, si lo apagamos lo descontamos
+        if(isChecked) num_enabled++;
+        else num_enabled--;
         elements[i].setEnabled(isChecked);
         reclaculateEnergy();
         sendM();

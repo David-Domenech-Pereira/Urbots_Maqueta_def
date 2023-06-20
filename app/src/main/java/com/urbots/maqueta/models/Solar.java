@@ -45,8 +45,13 @@ public class Solar extends  ElementCiutat{
     public int getPosicio() {
         return  posicio;
     }
-    public int translatePosicio(){
 
+    /**
+     * Métode que tradueix la posició de 0 - 255 al rang 30-150
+     * @return Posicio
+     */
+    public int translatePosicio(){
+        return (posicio*(120/255)+30);
     }
     @Override
     public String generateFrame() {
@@ -54,7 +59,7 @@ public class Solar extends  ElementCiutat{
         frame += getFrameEnabled()+"|"; //posem els enabled
         //Posem 5 cops el número
         for(int i = 0; i <5; i++){
-            frame += posicio+"|";
+            frame += translatePosicio()+"|";
         }
         return  frame;
     }

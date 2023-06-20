@@ -61,44 +61,32 @@ VALUES('192.168.0.40', 0);
 
 INSERT INTO ElementInteractuar(potEncendre, enabled, ciutat)
 VALUES (1, 1, '192.168.0.10'),
-    (0, 0, '192.168.0.10'),
-    (0, 1, '192.168.0.10'),
     (1, 0, '192.168.0.10'),
     (1, 1, '192.168.0.10'),
-    (0, 0, '192.168.0.20'),
-    (0, 1, '192.168.0.20'),
+    (1, 0, '192.168.0.10'),
+    (1, 1, '192.168.0.10'),
     (1, 0, '192.168.0.20'),
     (1, 1, '192.168.0.20'),
-    (0, 0, '192.168.0.20'),
+    (1, 0, '192.168.0.20'),
+    (1, 1, '192.168.0.20'),
+    (1, 0, '192.168.0.20'),
     (1, 1, '192.168.0.30'),
     (1, 1, '192.168.0.40');
 
-CREATE VIEW IF NOT EXISTS vSolar [(ip, posicio, energia)] AS
-SELECT S.posicio,
+CREATE VIEW IF NOT EXISTS vSolar (ip, posicio, energia) AS SELECT S.posicio,
     S.energia,
-    E.ciutat
-FROM ElementInteractuar AS E,
-    Solar AS S
-WHERE E.ciutat = '192.168.0.10';
+    E.ciutat FROM ElementInteractuar E,
+    Solar S WHERE E.ciutat = '192.168.0.10';
 
-CREATE VIEW IF NOT EXISTS vEolica [(ip, vent, energia)] AS
-SELECT O.vent,
+CREATE VIEW IF NOT EXISTS vEolica (ip, vent, energia) AS SELECT O.vent,
     O.energia,
-    E.ciutat
-FROM ElementInteractuar AS E,
-    Eolica AS O
-WHERE E.ciutat = '192.168.20';
+    E.ciutat FROM ElementInteractuar AS E,
+    Eolica AS O WHERE E.ciutat = '192.168.20';
 
-CREATE VIEW IF NOT EXISTS vNuclear [(ip, energia)] AS
-SELECT N.energia,
-    E.ciutat
-FROM ElementInteractuar AS E,
-    Nuclear AS N
-WHERE E.ciutat = '192.168.40';
+CREATE VIEW IF NOT EXISTS vNuclear (ip, energia) AS SELECT N.energia,
+    E.ciutat FROM ElementInteractuar AS E,
+    Nuclear AS N WHERE E.ciutat = '192.168.40';
 
-CREATE VIEW IF NOT EXISTS vCiutat [(ip, energia)] AS
-SELECT C.energia,
-    E.ciutat
-FROM ElementInteractuar AS E,
-    Ciutat AS C
-WHERE E.ciutat = '192.168.30';
+CREATE VIEW IF NOT EXISTS vCiutat (ip, energia) AS SELECT C.energia,
+    E.ciutat FROM ElementInteractuar AS E,
+    Ciutat AS C WHERE E.ciutat = '192.168.30';

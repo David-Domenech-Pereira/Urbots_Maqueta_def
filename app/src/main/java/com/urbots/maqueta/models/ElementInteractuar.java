@@ -21,4 +21,7 @@ public class ElementInteractuar {
     }
 
 
+    public boolean potEncendre() {
+        return  potEncendre;
+    }
 }

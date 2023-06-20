@@ -30,7 +30,8 @@ public class MainActivity extends ComponentActivity {
             @Override
             public void onClick(View v) {
                 // Carreguem el cd'ú
-                new InteractuarEolica();
+                Intent intent = new Intent(MainActivity.this,InteractuarEolica.class);
+                startActivity(intent);
             }
         });
         boton_solar.setOnClickListener(new View.OnClickListener() {

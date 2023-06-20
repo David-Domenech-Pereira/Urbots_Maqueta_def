@@ -145,7 +145,7 @@ public class InteractuarPanells extends ComponentActivity {
         });
     }
     private void moure_elements(){
-        //TODO moure els elements activats
+
         int posicio = element.getPosicio();
         for(int i = 0; i < element.getSizeElements(); i++){
             /** Recorrem tots els elemenets, si estan activats posem rotacio al valor de posicio*/
