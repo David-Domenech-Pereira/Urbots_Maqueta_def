@@ -23,14 +23,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        System.out.println("CReamos");
+        executeSQLScript(db, "AppMaquetaBBDD.sql");
+        //db.execSQL("CREATE TABLE `ElementCiutat` (`ip` varchar(12) NOT NULL, PRIMARY KEY (`ip`))");
 
-            executeSQLScript(db, "AppMaquetaBBDD.sql");
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Handle database upgrade if needed
+
     }
 
     private void executeSQLScript(SQLiteDatabase db, String scriptName) {

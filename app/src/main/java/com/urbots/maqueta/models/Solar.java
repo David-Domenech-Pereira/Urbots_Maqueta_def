@@ -45,7 +45,9 @@ public class Solar extends  ElementCiutat{
     public int getPosicio() {
         return  posicio;
     }
+    public int translatePosicio(){
 
+    }
     @Override
     public String generateFrame() {
         String frame = "S|"; //comença amb 0

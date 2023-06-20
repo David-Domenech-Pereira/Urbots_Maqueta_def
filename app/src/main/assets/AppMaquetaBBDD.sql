@@ -1,9 +1,9 @@
---He tret el drop y create perqué peta
+
 
 CREATE TABLE `ElementCiutat` (
     `ip` varchar(12) NOT NULL,
     PRIMARY KEY (`ip`)
-); --es veu que no accepta el engine y el tipus de codificació
+);
 
 CREATE TABLE `Solar` (
     `ip` varchar(12) NOT NULL,
@@ -36,35 +36,35 @@ CREATE TABLE `Ciutat` (
 );
 
 CREATE TABLE `ElementInteractuar` (
-    `id` INTEGER PRIMARY KEY, -- per algun motiu això va així
-    `potEncendre` INTEGER(1) DEFAULT 0, --intentar usar nomes un bit no va molt bé
+    `id` INTEGER PRIMARY KEY,
+    `potEncendre` INTEGER(1) DEFAULT 0,
     `enabled` INTEGER(1) DEFAULT 0,
     `ciutat` varchar(12) NOT NULL,
     CONSTRAINT `fk_interactuar_element` FOREIGN KEY (`ciutat`) REFERENCES `ElementCiutat` (`ip`)
 );
 
 INSERT INTO ElementCiutat(ip) VALUES
-('192.168.0.10'), --IP Solar*/
-('192.168.0.20'), --IP Aerogenerador*/
-('192.168.0.30'), --IP Ciutat*/
-('192.168.0.40'); --IP Nuclear*/
-INSERT INTO Solar(ip, posicio, energia) VALUES ('192.168.0.10',0,0)
-INSERT INTO Eolica(ip,posicio,energia) VALUES ('192.168.0.20',0,0)
-INSERT INTO Nuclear(ip,energia) VALUES ('192.168.0.30',0)
-INSERT INTO Ciutat(ip, energia) VALUES('192.168.0.40',0)
+('192.168.0.10'),
+('192.168.0.20'),
+('192.168.0.30'),
+('192.168.0.40');
+INSERT INTO Solar(ip, posicio, energia) VALUES ('192.168.0.10',0,0);
+INSERT INTO Eolica(ip,vent,energia) VALUES ('192.168.0.20',0,0);
+INSERT INTO Nuclear(ip,energia) VALUES ('192.168.0.30',0);
+INSERT INTO Ciutat(ip, energia) VALUES('192.168.0.40',0);
 INSERT INTO ElementInteractuar(potEncendre, enabled, ciutat) VALUES
-(1, 1, '192.168.0.10'), --Insert Solar
+(1, 1, '192.168.0.10'),
 (0, 0, '192.168.0.10'),
 (0, 1, '192.168.0.10'),
 (1, 0, '192.168.0.10'),
 (1, 1, '192.168.0.10'),
-(0, 0, '192.168.0.20'), --Insert Eolic 
+(0, 0, '192.168.0.20'),
 (0, 1, '192.168.0.20'),
 (1, 0, '192.168.0.20'),
 (1, 1, '192.168.0.20'),
 (0, 0, '192.168.0.20'),
-(1, 1, '192.168.0.30'), --Insert Ciutat
-(1, 1, '192.168.0.40'); --Insert Nuclear
+(1, 1, '192.168.0.30'),
+(1, 1, '192.168.0.40');
 
 
 

@@ -22,11 +22,11 @@ public abstract class ElementCiutat {
         loadElements();
     }
     public void loadElements(){
-        //TODO Carrega els elements de la BBDD
+
         String selection = "ciutat = ?";
         String[] selectionArgs = {ip};
         String[] projection = {"id","potEncendre", "enabled"};
-        Cursor cursor = database.query("ElementCiutat", projection, selection, selectionArgs, null, null, null);
+        Cursor cursor = database.query("ElementInteractuar", projection, selection, selectionArgs, null, null, null);
         int i = 0;
         elements_num=0;
         // Procesar el resultado de la consulta
@@ -126,4 +126,7 @@ public abstract class ElementCiutat {
         return  ip;
     }
 
+    public void setIP(String s) {
+        this.ip = s;
+    }
 }

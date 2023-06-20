@@ -22,8 +22,17 @@ public class BBDDTest {
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         ElementCiutat.setDB(db); //Ponemos la BD
         Solar elemento = Solar.getsolar();
-        assertTrue(elemento.getIP()=="192.168.0.10");
+
+        assertTrue(elemento.getIP().equals("192.168.0.10"));
         assertTrue(elemento.getSizeElements()==5);
+
+        //Ahora canviamos la IP y ponemos la "192.168.0.8", miramos si està OK
+        elemento.setIP("192.168.0.8");
+        elemento.update();
+        assertTrue(elemento.getIP().equals("192.168.0.8"));
+        //Lo dejamos cómo estaba
+        elemento.setIP("192.168.0.10");
+        elemento.update();
     }
     @Test
     public void testDatabaseCreation() {

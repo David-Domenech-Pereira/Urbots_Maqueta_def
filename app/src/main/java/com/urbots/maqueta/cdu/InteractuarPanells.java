@@ -1,6 +1,7 @@
 package com.urbots.maqueta.cdu;
 
 import android.animation.ObjectAnimator;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -21,6 +22,8 @@ import android.widget.Switch;
 import androidx.activity.ComponentActivity;
 
 import com.urbots.maqueta.R;
+import com.urbots.maqueta.auxiliar.DatabaseHelper;
+import com.urbots.maqueta.models.ElementCiutat;
 import com.urbots.maqueta.models.ElementInteractuar;
 import com.urbots.maqueta.models.Solar;
 
@@ -32,6 +35,9 @@ public class InteractuarPanells extends ComponentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.interactuar_panells);
+        DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
+        SQLiteDatabase db = databaseHelper.getWritableDatabase();
+        ElementCiutat.setDB(db); //Ponemos la BD
         LinearLayout container = findViewById(R.id.container);
 
         container.setGravity(Gravity.CENTER_HORIZONTAL); // Centrar horizontalmente
