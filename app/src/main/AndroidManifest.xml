@@ -27,6 +27,8 @@
         <activity android:name=".cdu.InteractuarPanells"
             ></activity>
         <activity android:name=".cdu.InteractuarEolica"
+            ></activity>
+        <activity android:name=".cdu.InteractuarNuclear"
             >
         </activity>
     </application>

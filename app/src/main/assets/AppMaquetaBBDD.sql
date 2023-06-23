@@ -22,6 +22,7 @@ CREATE TABLE `Eolica` (
 CREATE TABLE `Nuclear` (
     `ip` varchar(12) NOT NULL,
     `energia` int(5) DEFAULT 0,
+    `potencia` int(5) DEFAULT 0,
     PRIMARY KEY (`ip`),
     CONSTRAINT `fk_nuclear_element` FOREIGN KEY (`ip`) REFERENCES `ElementCiutat` (`ip`)
 );

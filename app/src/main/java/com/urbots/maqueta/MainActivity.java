@@ -54,7 +54,8 @@ public class MainActivity extends ComponentActivity {
             @Override
             public void onClick(View v) {
                 // Carreguem el cd'ú
-                new InteractuarNuclear();
+                Intent intent = new Intent(MainActivity.this,InteractuarNuclear.class);
+                startActivity(intent);
             }
         });
         boton_ciutat.setOnClickListener(new View.OnClickListener() {
