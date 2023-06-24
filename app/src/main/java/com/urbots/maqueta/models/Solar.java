@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 public class Solar extends  ElementCiutat{
     int posicio;
 
-    float energia;
     public  Solar(String ip, float energia, int posicio){
         super(ip,energia);
         this.energia = energia;
@@ -53,6 +52,12 @@ public class Solar extends  ElementCiutat{
     public int translatePosicio(){
         return (posicio*(120/255)+30);
     }
+
+    @Override
+    public String getCharFrame() {
+        return "S";
+    }
+
     @Override
     public String generateFrame() {
         String frame = "S|"; //comença amb 0
@@ -89,6 +94,36 @@ public class Solar extends  ElementCiutat{
 
     @Override
     public void reclaculateEnergy() {
-        //TODO fer
+
+        //Dividint la hora entre 3600 tenim la hora actual
+        int actual_hour = (int) Math.round(hora);
+        //Treiem angle optim entre 0 i 180 graus
+        double optim = calculateOptimalAngle(actual_hour);
+        //convertim de 0-180 a 0-255
+        double angle = optim*(255/180);
+        //més informació al word
+        double resta = Math.abs(posicio-angle); //mirem la posicio que si ens hem passat
+        double desfassament = posicio-resta;
+        double coeficient = desfassament/posicio;
+        energia = (float) ((float) (500*10^6)*num_enabled*coeficient*50);
+    }
+    private static double calculateOptimalAngle(int hour) {
+        // Suponiendo que el ángulo óptimo al mediodía es de 90 grados
+        double angleNoon = 90.0;
+
+        // Obtener la desviación angular en relación con el mediodía
+        double angleDeviation = Math.abs(hour - 12) * 15.0; // Cada hora se desvía 15 grados
+
+        // Calcular el ángulo óptimo
+        double optimalAngle = angleNoon - angleDeviation;
+
+        // Ajustar el ángulo dentro del rango de 0 a 180 grados
+        if (optimalAngle < 0) {
+            optimalAngle += 180.0;
+        } else if (optimalAngle > 180.0) {
+            optimalAngle -= 180.0;
+        }
+
+        return optimalAngle;
     }
 }

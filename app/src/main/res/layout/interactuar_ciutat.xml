@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scaleX="1">
 
-    <Switch
-        android:id="@+id/switch7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imageView4"
-        android:layout_alignBottom="@+id/imageView4"
-        android:layout_marginStart="49dp"
-        android:layout_marginBottom="270dp" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -28,92 +21,115 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="163dp"
-        android:layout_marginEnd="33dp"
-        android:layout_marginBottom="324dp"
-        app:srcCompat="@drawable/imatge_ciutat" />
-
-    <Switch
-        android:id="@+id/switch3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imageView4"
-        android:layout_alignBottom="@+id/imageView4"
-        android:layout_marginStart="49dp"
-        android:layout_marginBottom="270dp" />
+        android:src="@drawable/imatge_ciutat"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        tools:layout_editor_absoluteX="0dp" />
 
     <Switch
         android:id="@+id/switch4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imageView4"
-        android:layout_alignBottom="@+id/imageView4"
-        android:layout_marginStart="109dp"
-        android:layout_marginBottom="254dp" />
+        android:layout_alignTop="@id/imageView4"
+        android:layout_alignBottom="@id/imageView4"
+        android:layout_marginEnd="304dp"
+        android:layout_marginBottom="292dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="@+id/imageView4" />
 
     <Switch
-        android:id="@+id/switch5"
+        android:id="@+id/switch3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imageView4"
-        android:layout_alignBottom="@+id/imageView4"
-        android:layout_marginStart="159dp"
-        android:layout_marginBottom="284dp" />
+
+        android:layout_alignTop="@id/imageView4"
+        android:layout_alignBottom="@id/imageView4"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="128dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Switch
-        android:id="@+id/switch6"
+        android:id="@+id/switch2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imageView4"
-        android:layout_alignBottom="@+id/imageView4"
-        android:layout_marginStart="245dp"
-        android:layout_marginBottom="134dp" />
+
+        android:layout_alignTop="@id/imageView4"
+        android:layout_alignBottom="@id/imageView4"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="128dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Switch
-        android:id="@+id/switch10"
+        android:id="@+id/switch1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imageView4"
-        android:layout_alignBottom="@+id/imageView4"
-        android:layout_marginStart="251dp"
-        android:layout_marginBottom="298dp" />
 
-    <Switch
-        android:id="@+id/switch11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imageView4"
-        android:layout_alignBottom="@+id/imageView4"
-        android:layout_marginStart="187dp"
-        android:layout_marginBottom="131dp" />
-
-    <Switch
-        android:id="@+id/switch12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imageView4"
-        android:layout_alignBottom="@+id/imageView4"
-        android:layout_marginStart="83dp"
-        android:layout_marginBottom="123dp" />
+        android:layout_alignTop="@id/imageView4"
+        android:layout_alignBottom="@id/imageView4"
+        android:layout_marginEnd="260dp"
+        android:layout_marginBottom="112dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="@+id/imageView4" />
 
     <Switch
         android:id="@+id/switch8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imageView4"
-        android:layout_alignBottom="@+id/imageView4"
-        android:layout_marginStart="301dp"
-        android:layout_marginBottom="227dp" />
+
+        android:layout_alignTop="@id/imageView4"
+        android:layout_alignBottom="@id/imageView4"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="232dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="@+id/imageView4" />
 
     <Switch
-        android:id="@+id/switch13"
+        android:id="@+id/switch7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignTop="@id/imageView4"
+        android:layout_alignBottom="@id/imageView4"
+        android:layout_marginEnd="76dp"
+        android:layout_marginBottom="316dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Switch
+        android:id="@+id/switch6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignTop="@id/imageView4"
+        android:layout_alignBottom="@id/imageView4"
+        android:layout_marginEnd="172dp"
+        android:layout_marginBottom="312dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Switch
+        android:id="@+id/switch5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imageView4"
+        android:layout_alignBottom="@id/imageView4"
+        android:layout_marginEnd="236dp"
+        android:layout_marginBottom="300dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Switch
+        android:id="@+id/switch0"
         android:layout_width="187dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="607dp"
-        android:layout_marginEnd="114dp"
-        android:text="Switch" />
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="112dp"
+        android:text="Industria"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

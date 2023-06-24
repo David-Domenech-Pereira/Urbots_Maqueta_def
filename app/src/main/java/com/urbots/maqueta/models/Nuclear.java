@@ -5,7 +5,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 public class Nuclear extends  ElementCiutat{
-    float energia;
+
     private int potencia;
     private final int potencia_max = 255;
     public Nuclear(String ip, float energia, int potencia) {
@@ -34,6 +34,12 @@ public class Nuclear extends  ElementCiutat{
         }
         return new Nuclear(ip,energia,potencia);
     }
+
+    @Override
+    public String getCharFrame() {
+        return "N";
+    }
+
     @Override
     public String generateFrame() {
         String frame = "N|"; //comença amb N

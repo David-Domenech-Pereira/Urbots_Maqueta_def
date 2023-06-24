@@ -13,13 +13,14 @@ public abstract class ElementCiutat {
     protected int num_enabled; //Cantidad de elementos encendidos
     protected static SQLiteDatabase database;
     String ip;
-    protected float energia;
+    protected float energia; //Tenim la potencia en W
     ElementInteractuar elements[]; //TODO Seria millor implementar una llista dinàmica (sobre un hashmap) amb els actius
     int elements_num;
+    protected double hora; //guardem hora, que són nombre de segons desde les 00
     public  ElementCiutat(String ip, float energia){
         this.ip = ip;
         this.energia = energia;
-        elements = new ElementInteractuar[5];
+        elements = new ElementInteractuar[15];
         num_enabled = 0; //al principio no hay ninguno encendido
         loadElements();
     }
@@ -87,12 +88,25 @@ public abstract class ElementCiutat {
     }
 
     /**
+     * Devuelve el carácter que correspondería en el Frame
+     * @return Caràcter, per exemple 'S' per solar
+     */
+    public abstract String getCharFrame();
+    /**
      * Métode que envia el missatge a la maqueta
      */
     public void sendM(){
-        sendFrame(generateFrame());
+        sendFrame(generateFrame(),ip);
+        //Hem de enviar al master
+        String frame_master = getCharFrame()+"|"+getFrameEnabled()+"|0|0|0|"+getkWh()+"|"+getWh()+"|";
+        sendFrame(frame_master,"192.168.0.100");
     }
-
+    private int getkWh(){
+        return (int) energia/(10^3); //arrodonim i treiem només els KW
+    }
+    private int getWh(){
+        return (int) energia- getkWh()*10^3; //Treiem els kW
+    }
     /**
      * Métode que genera el frame per aquest tipus
      * @return String Frame
@@ -103,7 +117,7 @@ public abstract class ElementCiutat {
      * Métode que envia el frame
      * @param frame String
      */
-    public void sendFrame(String frame){
+    public void sendFrame(String frame, String ip){
         new UDPSenderTask(ip,frame).execute();
     }
     /**

@@ -62,7 +62,8 @@ public class MainActivity extends ComponentActivity {
             @Override
             public void onClick(View v) {
                 // Carreguem el cd'ú
-                new ConfigurarMaqueta();
+                Intent intent = new Intent(MainActivity.this,InteractuarCiutat.class);
+                startActivity(intent);
             }
         });
     }

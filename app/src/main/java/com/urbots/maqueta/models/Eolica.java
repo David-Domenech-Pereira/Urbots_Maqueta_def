@@ -6,7 +6,6 @@ import android.database.Cursor;
 
 public class Eolica extends  ElementCiutat{
     int vent;
-    float energia;
 
     public Eolica(String ip, float energia, int vent) {
         super(ip, energia);
@@ -33,6 +32,12 @@ public class Eolica extends  ElementCiutat{
         }
         return new Eolica(ip,energia,vent);
     }
+
+    @Override
+    public String getCharFrame() {
+        return "E";
+    }
+
     @Override
     public String generateFrame() {
         String frame = "E|"; //comença amb 0
