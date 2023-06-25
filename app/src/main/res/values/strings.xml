@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Urbots Maqueta</string>
+    <string-array name="spinner_options">
+    </string-array>
 </resources>
