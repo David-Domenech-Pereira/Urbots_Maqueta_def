@@ -112,7 +112,7 @@ public class InteractuarEolica extends ComponentActivity {
             /** Recorrem tots els elemenets, si estan activats posem rotacio al valor de posicio*/
             if(molins_element[i].getEnabled()&&molins[i]!=null&&posicio!=0){
                 RotateAnimation rotateAnimation = new RotateAnimation(molins[i].getRotation(), 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-                rotateAnimation.setDuration((255-posicio)*10); // Duración de la animación en milisegundos
+                rotateAnimation.setDuration((300-posicio)*10); // Duración de la animación en milisegundos
                 rotateAnimation.setRepeatCount(Animation.INFINITE); // Repetir infinitamente
                 rotateAnimation.setInterpolator(new LinearInterpolator()); // Interpolador lineal para una rotación uniforme
                 // Aplicar animación al ImageView

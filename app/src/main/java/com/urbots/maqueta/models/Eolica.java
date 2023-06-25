@@ -37,17 +37,21 @@ public class Eolica extends  ElementCiutat{
     public String getCharFrame() {
         return "E";
     }
-
+    public int translateVent(){
+        double coef = vent*190/255;
+        return ((int)coef+65);
+    }
     @Override
     public String generateFrame() {
         String frame = "E|"; //comença amb 0
         frame += getFrameEnabled()+"|"; //posem els enabled
         //Posem 5 cops el número
         for(int i = 0; i <3; i++){
-            frame += vent+"|";
+            frame += translateVent()+"|";
         }
         frame += getkWh()+"|";
         frame += getWh()+"|";
+        System.out.println(frame);
         return  frame;
     }
 
