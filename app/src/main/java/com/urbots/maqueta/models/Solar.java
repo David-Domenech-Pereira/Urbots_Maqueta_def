@@ -50,7 +50,8 @@ public class Solar extends  ElementCiutat{
      * @return Posicio
      */
     public int translatePosicio(){
-        return (posicio*(120/255)+30);
+        double coef = posicio*120/255;
+        return ((int)coef+30);
     }
 
     @Override
@@ -63,9 +64,11 @@ public class Solar extends  ElementCiutat{
         String frame = "S|"; //comença amb 0
         frame += getFrameEnabled()+"|"; //posem els enabled
         //Posem 5 cops el número
-        for(int i = 0; i <5; i++){
+        for(int i = 0; i <3; i++){
             frame += translatePosicio()+"|";
         }
+        frame += getkWh()+"|";
+        frame += getWh()+"|";
         return  frame;
     }
 

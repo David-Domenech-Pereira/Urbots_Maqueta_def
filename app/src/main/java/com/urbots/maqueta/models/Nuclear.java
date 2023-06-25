@@ -45,9 +45,11 @@ public class Nuclear extends  ElementCiutat{
         String frame = "N|"; //comença amb N
         frame += getFrameEnabled()+"|"; //posem els enabled, en aquest cas 100000
         //Posem 5 cops la poténcia
-        for(int i = 0; i <5; i++){
+        for(int i = 0; i <3; i++){
             frame += potencia+"|";
         }
+        frame += getkWh()+"|";
+        frame += getWh()+"|";
         return  frame;
     }
 

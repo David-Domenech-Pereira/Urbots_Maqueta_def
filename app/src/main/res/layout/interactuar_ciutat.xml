@@ -27,7 +27,7 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <Switch
-        android:id="@+id/switch4"
+        android:id="@+id/switch3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/imageView4"
@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView4" />
 
     <Switch
-        android:id="@+id/switch3"
+        android:id="@+id/switch2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -50,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Switch
-        android:id="@+id/switch2"
+        android:id="@+id/switch1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -62,7 +62,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/switch0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -74,7 +74,7 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView4" />
 
     <Switch
-        android:id="@+id/switch8"
+        android:id="@+id/switch7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -86,7 +86,7 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView4" />
 
     <Switch
-        android:id="@+id/switch7"
+        android:id="@+id/switch6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -98,7 +98,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Switch
-        android:id="@+id/switch6"
+        android:id="@+id/switch5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -110,7 +110,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Switch
-        android:id="@+id/switch5"
+        android:id="@+id/switch4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/imageView4"
@@ -121,14 +121,38 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Switch
-        android:id="@+id/switch0"
+        android:id="@+id/switch8"
         android:layout_width="187dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="112dp"
-        android:text="Industria"
+        android:text="Industria 1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <Switch
+        android:id="@+id/switch9"
+        android:layout_width="187dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="112dp"
+        android:text="Industria 2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <Switch
+        android:id="@+id/switch10"
+        android:layout_width="187dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="132dp"
+        android:layout_marginEnd="112dp"
+        android:text="Mode Disco"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 

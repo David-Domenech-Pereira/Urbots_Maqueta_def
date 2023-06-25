@@ -43,9 +43,11 @@ public class Eolica extends  ElementCiutat{
         String frame = "E|"; //comença amb 0
         frame += getFrameEnabled()+"|"; //posem els enabled
         //Posem 5 cops el número
-        for(int i = 0; i <5; i++){
+        for(int i = 0; i <3; i++){
             frame += vent+"|";
         }
+        frame += getkWh()+"|";
+        frame += getWh()+"|";
         return  frame;
     }
 
@@ -92,5 +94,7 @@ public class Eolica extends  ElementCiutat{
 
     public void setVent(int i) {
         vent = i;
+        sendM();
+        update();
     }
 }

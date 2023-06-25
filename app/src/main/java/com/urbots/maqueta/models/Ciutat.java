@@ -20,10 +20,19 @@ public class Ciutat extends  ElementCiutat{
     public String generateFrame() {
         String frame = "C|"; //comença amb 0
         frame += getFrameEnabled()+"|"; //posem els enabled
+
         //Posem 5 cops el número
-        for(int i = 0; i <5; i++){
-            frame += energia+"|";
+        for(int i = 8; i < 11; i++){
+            if(elements[i].getEnabled()){
+                frame += 150+"|";
+            }else {
+                frame += 50+"|";
+            }
+
         }
+        //posem la energia als 2 que falten
+        frame += getkWh()+"|";
+        frame += getWh()+"|";
         return  frame;
     }
 

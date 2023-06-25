@@ -61,7 +61,7 @@ public abstract class ElementCiutat {
         if(isChecked) num_enabled++;
         else num_enabled--;
         elements[i].setEnabled(isChecked);
-        reclaculateEnergy();
+
         sendM();
     }
     public String getFrameEnabled(){
@@ -96,16 +96,20 @@ public abstract class ElementCiutat {
      * Métode que envia el missatge a la maqueta
      */
     public void sendM(){
+
+        reclaculateEnergy();
         sendFrame(generateFrame(),ip);
+
         //Hem de enviar al master
         String frame_master = getCharFrame()+"|"+getFrameEnabled()+"|0|0|0|"+getkWh()+"|"+getWh()+"|";
-        sendFrame(frame_master,"192.168.0.100");
+        sendFrame(generateFrame(),"192.168.0.100");
     }
-    private int getkWh(){
-        return (int) energia/(10^3); //arrodonim i treiem només els KW
+    protected int getkWh(){
+        return (int) energia/(1000); //arrodonim i treiem només els KW
     }
-    private int getWh(){
-        return (int) energia- getkWh()*10^3; //Treiem els kW
+    protected int getWh(){
+
+        return (int) energia- getkWh()*1000; //Treiem els kW
     }
     /**
      * Métode que genera el frame per aquest tipus
