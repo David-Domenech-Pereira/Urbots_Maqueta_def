@@ -6,12 +6,12 @@
     android:background="#FFFFFF"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="93dp"
-        android:src="@drawable/logourbots2"/>
-    <!--android:background="#313335"-->
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -76,13 +76,6 @@
         <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
 
         </RelativeLayout>
-
-        <Button
-            android:id="@+id/Fons"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="300dp"
-            android:text="Fons fosc" />
     </RelativeLayout>
 
     <ImageButton
