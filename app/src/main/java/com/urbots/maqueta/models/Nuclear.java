@@ -89,6 +89,8 @@ public class Nuclear extends  ElementCiutat{
 
     public void setPotencia(int i) {
         potencia = i;
+        sendM();
+        reclaculateEnergy();
     }
 
     public int getMaxPotencia() {

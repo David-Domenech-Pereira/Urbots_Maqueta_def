@@ -26,7 +26,7 @@ import com.urbots.maqueta.cdu.InteractuarNuclear;
 import com.urbots.maqueta.cdu.InteractuarPanells;
 
 public class MainActivity extends AppCompatActivity {
-    boolean esClar = true;
+    public static boolean esClar = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final RelativeLayout relativeLayout = findViewById(R.id.fonsBotons);

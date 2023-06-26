@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/opcio_reset"
+        app:showAsAction="never"
+        android:title="Resetear valors" />
+
+    <item
+        android:id="@+id/atras"
+        android:title="Atras"
+        android:icon="@drawable/baseline_arrow_back_24"
+        app:showAsAction="always"/>
+</menu>
