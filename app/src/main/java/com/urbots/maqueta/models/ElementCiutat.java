@@ -154,4 +154,10 @@ public abstract class ElementCiutat {
     public void setIP(String s) {
         this.ip = s;
     }
+
+    public void setStatusNoM(int i, boolean status) {
+        if(status) num_enabled++;
+        else num_enabled--;
+        elements[i].setEnabled(status);
+    }
 }

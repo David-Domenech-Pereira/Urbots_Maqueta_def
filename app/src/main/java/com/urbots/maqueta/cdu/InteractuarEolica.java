@@ -1,9 +1,13 @@
 package com.urbots.maqueta.cdu;
 
-import android.animation.ObjectAnimator;
+import android.os.Bundle;
+import android.os.Handler;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -24,12 +28,17 @@ import com.urbots.maqueta.models.ElementCiutat;
 import com.urbots.maqueta.models.ElementInteractuar;
 import com.urbots.maqueta.models.Eolica;
 
+import java.util.Random;
+
 public class InteractuarEolica extends ComponentActivity {
     Eolica element;
     ElementInteractuar molins_element[];
     ImageView molins[];
+    Boolean mode_auto = false;
+    Handler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        handler = new Handler();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.interactuar_eolica);
         DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
@@ -38,9 +47,11 @@ public class InteractuarEolica extends ComponentActivity {
         LinearLayout container = findViewById(R.id.container);
 
         container.setGravity(Gravity.CENTER_HORIZONTAL); // Centrar horizontalmente
+
         element = element.getEolica();
         molins_element = element.getElements();
         molins = new ImageView[element.getSizeElements()];
+        Switch botones[] = new Switch[element.getSizeElements()];
         //Sólo se muestran la cantidad activa
         for (int i = 0; i < element.getSizeElements(); i++) {
             if(!molins_element[i].potEncendre()) continue;
@@ -52,6 +63,7 @@ public class InteractuarEolica extends ComponentActivity {
                     ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.MATCH_PARENT
             );
+            botones[i] = switchButton;
             switchButton.setVisibility(View.VISIBLE);
             switchButton.setLayoutParams(switchParams);
             final int botonNumero = i; // Número de botón
@@ -83,6 +95,31 @@ public class InteractuarEolica extends ComponentActivity {
             //Lo añadimos al contenedor de fuera
             container.addView(vertical_layout);
         }
+        Switch auto = findViewById(R.id.modeAuto);
+        auto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    //activem mode auto
+                    for (int j = 0; j < element.getSizeElements(); j++) {
+
+                        System.out.println("Switch->"+j+" OFF");
+                        element.setStatus(false,j);
+                        botones[j].setEnabled(false);
+                    }
+                    mode_auto = true;
+                }else{
+                    for (int j = 0; j < element.getSizeElements(); j++) {
+
+                        System.out.println("Switch->"+j+" OFF");
+
+                        botones[j].setEnabled(true);
+                        botones[j].setChecked(molins_element[j].getEnabled());
+                    }
+                    mode_auto=false;
+                }
+            }
+        });
         SeekBar mover = findViewById(R.id.seekBar);
         mover.setProgress(element.getVent());
         mover.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -103,7 +140,64 @@ public class InteractuarEolica extends ComponentActivity {
 
             }
         });
+
         moure_elements(); //fem que es moguin els encesos
+
+
+    }
+    protected   void controlaApp(){
+            System.out.println("APP => entra");
+            if(mode_auto){
+                System.out.println("APP => auto");
+                //posem el vent a 60
+                element.setVent(60);
+                //obtenim 2 números randoms diferents
+                int num[] = new int[2];
+                num = getAletaoris();
+                boolean status[] = new boolean[element.getSizeElements()];
+
+                for(int i = 0; i < element.getSizeElements();i++){
+                    System.out.println("i = "+i+" el1= "+num[0]+ "el2= "+num[1]);
+                    if(i==num[0]||i==num[1]){
+                        System.out.println("ON => i = "+i+" el1= "+num[0]+ "el2= "+num[1]);
+                        status[i] = true;
+                    }else{
+                        status[i] = false;
+
+                    }
+                    element.setStatusNoM(i,status[i]);
+                }
+                element.sendM();
+                moure_elements();
+                element.sendM();
+                handler.postDelayed(this::controlaApp, 15000);
+
+            }else{
+                element.sendM();
+                handler.postDelayed(this::controlaApp, 1000);
+
+            }
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Llama al método que ejecutará el código en cada frame
+        controlaApp();
+    }
+
+
+    private int[] getAletaoris(){
+        int num[] = new int[2];
+        num[0] = (int)(element.getSizeElements()*Math.random());
+        int element_n = (int)(element.getSizeElements()*Math.random());
+        //Mirem que no trobi un número igual
+        while (element_n==num[0]){
+            element_n = (int)(element.getSizeElements()*Math.random());
+        }
+        num[1] = element_n;
+        return num;
     }
     private void moure_elements(){
 

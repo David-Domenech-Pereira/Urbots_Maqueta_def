@@ -51,7 +51,7 @@ public class InteractuarCiutat extends AppCompatActivity {
         elements = element.getElements();
         botones = new Switch[element.getSizeElements()];
         //Sólo se muestran la cantidad activa
-        for (int i = 0; i < element.getSizeElements() - 1; i++) {
+        for (int i = 0; i < element.getSizeElements(); i++) {
 
             int switchId = getResources().getIdentifier("switch" + i, "id", getPackageName());
             botones[i] = findViewById(switchId);
@@ -65,25 +65,35 @@ public class InteractuarCiutat extends AppCompatActivity {
                 botones[i].setChecked(false);
             }
             final int botonNumero = i; // Número de botón
+            final ElementCiutat element_std = element;
             botones[i].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (botonNumero == element.getSizeElements() - 1 && isChecked) {
-                        for (int j = 0; j < element.getSizeElements() - 1; j++) {
-                            botones[j].setClickable(false);
+                    System.out.println("Switch->Numero "+botonNumero);
+                    if (botonNumero == (element_std.getSizeElements() - 1) && isChecked) {
+                        for (int j = 0; j < element_std.getSizeElements() - 1; j++) {
+                            int switchId = getResources().getIdentifier("switch" + j, "id", getPackageName());
+                            botones[j] = findViewById(switchId);
+                            System.out.println("Switch->"+j+" OFF");
+                            botones[j].setEnabled(false);
                         }
-                    } else if (botonNumero == element.getSizeElements() - 1 && !isChecked)
-                        for (int j = 0; j < element.getSizeElements() - 1; j++) {
-                            botones[j].setClickable(true);
+                    } else if (botonNumero == element_std.getSizeElements() - 1 && !isChecked) {
+                        for (int j = 0; j < element_std.getSizeElements() - 1; j++) {
+                            int switchId = getResources().getIdentifier("switch" + j, "id", getPackageName());
+                            botones[j] = findViewById(switchId);
+                            System.out.println("Switch->" + j + " OFF");
+                            botones[j].setEnabled(true);
                         }
-                    element.setStatus(isChecked, botonNumero);
+                    }
+                    element_std.setStatus(isChecked, botonNumero);
                 }
             });
         }
         int switchId = getResources().getIdentifier("switch" + (element.getSizeElements() - 1), "id", getPackageName());
 
-        botones[element.getSizeElements() - 1] = findViewById(switchId);
+
         botones[element.getSizeElements() - 1].setChecked(false);
+        element.setStatus(false,element.getSizeElements() - 1);
         final ImageView imageView = findViewById(R.id.imageView4);
         final ConstraintLayout constraintLayout = findViewById(R.id.layoutCiutat);
         final Switch industria1 = findViewById(R.id.switch8);
@@ -124,10 +134,12 @@ public class InteractuarCiutat extends AppCompatActivity {
                 int switchId = getResources().getIdentifier("switch" + i, "id", getPackageName());
                 botones[i] = findViewById(switchId);
                 botones[i].setChecked(true);
+                element.setStatus(true,i);
             }
             int switchId = getResources().getIdentifier("switch" + i, "id", getPackageName());
             botones[i] = findViewById(switchId);
             botones[i].setChecked(false);
+            element.setStatus(false,i);
         }
         return true;
     }

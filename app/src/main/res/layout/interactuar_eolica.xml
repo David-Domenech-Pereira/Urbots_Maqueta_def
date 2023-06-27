@@ -50,4 +50,14 @@
         android:text="Velocitat Del Vent"
         android:textSize="48sp" />
 
+    <Switch
+        android:id="@+id/modeAuto"
+        android:layout_width="154dp"
+        android:layout_height="47dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="127dp"
+        android:layout_marginBottom="288dp"
+        android:text="Mode Auto" />
+
 </RelativeLayout>
