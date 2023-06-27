@@ -51,7 +51,7 @@ public class InteractuarCiutat extends AppCompatActivity {
         elements = element.getElements();
         botones = new Switch[element.getSizeElements()];
         //Sólo se muestran la cantidad activa
-        for (int i = 0; i < element.getSizeElements(); i++) {
+        for (int i = 0; i < element.getSizeElements() - 1; i++) {
 
             int switchId = getResources().getIdentifier("switch" + i, "id", getPackageName());
             botones[i] = findViewById(switchId);
@@ -72,6 +72,7 @@ public class InteractuarCiutat extends AppCompatActivity {
                 }
             });
         }
+        botones[element.getSizeElements() - 1].setChecked(false);
         final ImageView imageView = findViewById(R.id.imageView4);
         final ConstraintLayout constraintLayout = findViewById(R.id.layoutCiutat);
         final Switch industria1 = findViewById(R.id.switch8);
@@ -107,26 +108,8 @@ public class InteractuarCiutat extends AppCompatActivity {
             elements = element.getElements();
             botones = new Switch[element.getSizeElements()];
             //Sólo se muestran la cantidad activa
-            for (int i = 0; i < element.getSizeElements(); i++) {
-
-                int switchId = getResources().getIdentifier("switch" + i, "id", getPackageName());
-                botones[i] = findViewById(switchId);
-                if (!elements[i].potEncendre()) {
-                    botones[i].setVisibility(View.GONE);
-                    continue;
-                }
-                if (elements[i].getEnabled()) {
-                    botones[i].setChecked(true);
-                } else {
-                    botones[i].setChecked(false);
-                }
-                final int botonNumero = i; // Número de botón
-                botones[i].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        element.setStatus(isChecked, botonNumero);
-                    }
-                });
+            for (int i = 0; i < element.getSizeElements() - 1; i++) {
+                botones[i].setChecked(true);
             }
         }
         return true;
