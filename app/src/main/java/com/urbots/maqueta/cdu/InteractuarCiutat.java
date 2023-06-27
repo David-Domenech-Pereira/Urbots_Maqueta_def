@@ -68,8 +68,15 @@ public class InteractuarCiutat extends AppCompatActivity {
             botones[i].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (botonNumero == element.getSizeElements() - 1 && isChecked) {
+                        for (int j = 0; j < element.getSizeElements() - 1; j++) {
+                            botones[j].setClickable(false);
+                        }
+                    } else if (botonNumero == element.getSizeElements() - 1 && !isChecked)
+                        for (int j = 0; j < element.getSizeElements() - 1; j++) {
+                            botones[j].setClickable(true);
+                        }
                     element.setStatus(isChecked, botonNumero);
-
                 }
             });
         }
