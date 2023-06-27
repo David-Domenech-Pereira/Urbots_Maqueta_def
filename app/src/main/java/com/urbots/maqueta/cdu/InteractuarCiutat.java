@@ -69,9 +69,13 @@ public class InteractuarCiutat extends AppCompatActivity {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     element.setStatus(isChecked, botonNumero);
+
                 }
             });
         }
+        int switchId = getResources().getIdentifier("switch" + (element.getSizeElements() - 1), "id", getPackageName());
+
+        botones[element.getSizeElements() - 1] = findViewById(switchId);
         botones[element.getSizeElements() - 1].setChecked(false);
         final ImageView imageView = findViewById(R.id.imageView4);
         final ConstraintLayout constraintLayout = findViewById(R.id.layoutCiutat);
@@ -108,10 +112,15 @@ public class InteractuarCiutat extends AppCompatActivity {
             elements = element.getElements();
             botones = new Switch[element.getSizeElements()];
             //Nomes settear a 1 els switches que no son disco
-            for (int i = 0; i < element.getSizeElements() - 1; i++) {
+            int i = 0;
+            for (i = 0; i < element.getSizeElements() - 1; i++) {
+                int switchId = getResources().getIdentifier("switch" + i, "id", getPackageName());
+                botones[i] = findViewById(switchId);
                 botones[i].setChecked(true);
             }
-            botones[i++].setChecked(false);
+            int switchId = getResources().getIdentifier("switch" + i, "id", getPackageName());
+            botones[i] = findViewById(switchId);
+            botones[i].setChecked(false);
         }
         return true;
     }
