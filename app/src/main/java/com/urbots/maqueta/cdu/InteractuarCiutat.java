@@ -107,10 +107,11 @@ public class InteractuarCiutat extends AppCompatActivity {
             element = Ciutat.getCiutat();
             elements = element.getElements();
             botones = new Switch[element.getSizeElements()];
-            //Sólo se muestran la cantidad activa
+            //Nomes settear a 1 els switches que no son disco
             for (int i = 0; i < element.getSizeElements() - 1; i++) {
                 botones[i].setChecked(true);
             }
+            botones[i++].setChecked(false);
         }
         return true;
     }
