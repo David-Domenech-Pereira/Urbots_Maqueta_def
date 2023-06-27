@@ -5,4 +5,8 @@
         android:id="@+id/opcio1"
         app:showAsAction="never"
         android:title="Canviar color fons" />
+    <item
+        android:id="@+id/opcio2"
+        app:showAsAction="never"
+        android:title="Connectar Wifi" />
 </menu>

@@ -1,5 +1,6 @@
 package com.urbots.maqueta.models;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -8,8 +9,11 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 
 public abstract class ElementCiutat {
+
     protected int num_enabled; //Cantidad de elementos encendidos
     protected static SQLiteDatabase database;
     String ip;
@@ -25,6 +29,8 @@ public abstract class ElementCiutat {
         loadElements();
         sendM();
     }
+
+
     public void loadElements(){
 
         String selection = "ciutat = ?";
