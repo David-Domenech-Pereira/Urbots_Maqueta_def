@@ -23,6 +23,7 @@ public abstract class ElementCiutat {
         elements = new ElementInteractuar[15];
         num_enabled = 0; //al principio no hay ninguno encendido
         loadElements();
+        sendM();
     }
     public void loadElements(){
 
@@ -73,12 +74,12 @@ public abstract class ElementCiutat {
             }else{
                 frame+="0";
             }
-            if(i>=9){
+            if(i>=7){
                 break; //Ja no n'hem de posar més
             }
             esc++;
         }
-        if(esc < 8){
+        if(esc < 7){
             while (esc<8){
                 frame+="0";
                 esc++;
@@ -99,7 +100,7 @@ public abstract class ElementCiutat {
 
         reclaculateEnergy();
         sendFrame(generateFrame(),ip);
-
+        System.out.println(generateFrame());
         //Hem de enviar al master
         String frame_master = getCharFrame()+"|"+getFrameEnabled()+"|0|0|0|"+getkWh()+"|"+getWh()+"|";
         sendFrame(generateFrame(),"192.168.0.100");

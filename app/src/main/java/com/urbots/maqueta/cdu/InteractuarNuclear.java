@@ -44,6 +44,7 @@ public class InteractuarNuclear extends ComponentActivity {
 
         container.setGravity(Gravity.CENTER_HORIZONTAL); // Centrar horizontalmente
     element = element.getNuclear();
+    element.sendM();
     central_nuclear = element.getElements();
     nuclear_fum = new ImageView[element.getSizeElements()];
     //Sólo se muestran la cantidad activa
