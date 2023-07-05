@@ -243,7 +243,7 @@ public class InteractuarPanells extends ComponentActivity {
 
             moure_elements();
             element.sendM();
-            element.sendM();
+
             handler.postDelayed(this::controlaApp, 5000);
 
         }else{
