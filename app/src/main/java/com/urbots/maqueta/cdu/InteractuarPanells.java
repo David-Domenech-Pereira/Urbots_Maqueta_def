@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,8 +32,13 @@ public class InteractuarPanells extends ComponentActivity {
     Solar element;
     ElementInteractuar panells_element[];
     ImageView panells[];
+    Switch switchButton[] = new Switch[10];
+    SeekBar mover;
+    Handler handler;
+    boolean mode_auto=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        handler = new Handler();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.interactuar_panells);
         DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
@@ -73,20 +79,21 @@ public class InteractuarPanells extends ComponentActivity {
             panells_layout.addView(solarMovible);
             panells_layout.addView(solarFixe,fijo);
             //Ponemos los switches
-            Switch switchButton = new Switch(this);
+
             LinearLayout.LayoutParams switchParams = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.MATCH_PARENT
             );
-            switchButton.setVisibility(View.VISIBLE);
-            switchButton.setLayoutParams(switchParams);
+            switchButton[i] = new Switch(this);
+            switchButton[i].setVisibility(View.VISIBLE);
+            switchButton[i].setLayoutParams(switchParams);
             final int botonNumero = i; // Número de botón
             if(panells_element[i].getEnabled()){
-                switchButton.setChecked(true);
+                switchButton[i].setChecked(true);
             }else{
-                switchButton.setChecked(false);
+                switchButton[i].setChecked(false);
             }
-            switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            switchButton[i].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     element.setStatus(isChecked, botonNumero);
@@ -107,7 +114,7 @@ public class InteractuarPanells extends ComponentActivity {
             );
             textViewLayoutParams.setMargins(100, 20, 0, 10); // Establecer márgenes superiores de 16 píxeles
             nuevo.setLayoutParams(mainParams);
-            nuevo.addView(switchButton,textViewLayoutParams);
+            nuevo.addView(switchButton[i],textViewLayoutParams);
             nuevo.addView(panells_layout,textViewLayoutParams);
 
 
@@ -122,8 +129,33 @@ public class InteractuarPanells extends ComponentActivity {
             container.addView(separador, separadorLayoutParams);
 
         }
+        Switch auto = findViewById(R.id.modeAuto2);
+        auto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    //activem mode auto
+                    for (int j = 0; j < element.getSizeElements(); j++) {
 
-        SeekBar mover = findViewById(R.id.seekBar);
+                        System.out.println("Switch->"+j+" OFF");
+                        element.setStatus(false,j);
+                        switchButton[j].setEnabled(false);
+                    }
+                    mode_auto = true;
+                }else{
+                    for (int j = 0; j < element.getSizeElements(); j++) {
+
+                        System.out.println("Switch->"+j+" OFF");
+
+                        switchButton[j].setEnabled(true);
+                        switchButton[j].setChecked(panells_element[j].getEnabled());
+                        mover.setEnabled(true);
+                    }
+                    mode_auto=false;
+                }
+            }
+        });
+        mover = findViewById(R.id.seekBar);
         mover.setProgress(element.getPosicio());
         mover.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -162,5 +194,74 @@ public class InteractuarPanells extends ComponentActivity {
             }
         }
 
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Llama al método que ejecutará el código en cada frame
+        controlaApp();
+    }
+    int posicio = 0;
+    final int max_posicio = 255;
+    boolean increase = true;
+    protected int moviment(){
+
+        //li resetegem la posició
+        if(increase){
+            posicio = max_posicio;
+            increase = false;
+        }else{
+            posicio = 0;
+            increase = true;
+        }
+        return posicio;
+    }
+    protected void controlaApp(){
+        System.out.println("APP => entra");
+        if(mode_auto){
+            System.out.println("APP => auto");
+            //posem la posicio que es vagi movent
+            int pos = moviment();
+            mover.setProgress(pos);
+            mover.setEnabled(false);
+            element.setPosicio(pos);
+
+            //obtenim 2 números randoms diferents
+            int num[] = new int[2];
+
+            boolean status[] = new boolean[element.getSizeElements()];
+
+            for(int i = 0; i < element.getSizeElements();i++){
+                System.out.println("i = "+i+" el1= "+num[0]+ "el2= "+num[1]);
+
+                status[i] = true;
+
+                element.setStatusNoM(i,status[i]);
+                switchButton[i].setChecked(status[i]);
+            }
+
+            moure_elements();
+            element.sendM();
+            element.sendM();
+            handler.postDelayed(this::controlaApp, 5000);
+
+        }else{
+
+            handler.postDelayed(this::controlaApp, 1000);
+
+        }
+
+    }
+    private int[] getAletaoris(){
+        int num[] = new int[2];
+        num[0] = (int)(element.getSizeElements()*Math.random());
+        int element_n = (int)(element.getSizeElements()*Math.random());
+        //Mirem que no trobi un número igual
+        while (element_n==num[0]){
+            element_n = (int)(element.getSizeElements()*Math.random());
+        }
+        num[1] = element_n;
+        return num;
     }
 }

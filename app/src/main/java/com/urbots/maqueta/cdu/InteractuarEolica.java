@@ -36,6 +36,8 @@ public class InteractuarEolica extends ComponentActivity {
     ImageView molins[];
     Boolean mode_auto = false;
     Handler handler;
+    Switch botones[] = new Switch[10];
+    SeekBar mover;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         handler = new Handler();
@@ -51,7 +53,7 @@ public class InteractuarEolica extends ComponentActivity {
         element = element.getEolica();
         molins_element = element.getElements();
         molins = new ImageView[element.getSizeElements()];
-        Switch botones[] = new Switch[element.getSizeElements()];
+
         //Sólo se muestran la cantidad activa
         for (int i = 0; i < element.getSizeElements(); i++) {
             if(!molins_element[i].potEncendre()) continue;
@@ -75,7 +77,7 @@ public class InteractuarEolica extends ComponentActivity {
             switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    element.setStatus(isChecked, botonNumero);
+                    if(!mode_auto) element.setStatus(isChecked, botonNumero);
                     moure_elements();
                 }
             });
@@ -115,12 +117,13 @@ public class InteractuarEolica extends ComponentActivity {
 
                         botones[j].setEnabled(true);
                         botones[j].setChecked(molins_element[j].getEnabled());
+                        mover.setEnabled(true);
                     }
                     mode_auto=false;
                 }
             }
         });
-        SeekBar mover = findViewById(R.id.seekBar);
+        mover = findViewById(R.id.seekBar);
         mover.setProgress(element.getVent());
         mover.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -150,7 +153,10 @@ public class InteractuarEolica extends ComponentActivity {
             if(mode_auto){
                 System.out.println("APP => auto");
                 //posem el vent a 60
+                mover.setProgress(60);
+                mover.setEnabled(false);
                 element.setVent(60);
+
                 //obtenim 2 números randoms diferents
                 int num[] = new int[2];
                 num = getAletaoris();
@@ -166,14 +172,16 @@ public class InteractuarEolica extends ComponentActivity {
 
                     }
                     element.setStatusNoM(i,status[i]);
+                    botones[i].setChecked(status[i]);
                 }
-                element.sendM();
+
                 moure_elements();
+                element.sendM();
                 element.sendM();
                 handler.postDelayed(this::controlaApp, 15000);
 
             }else{
-                element.sendM();
+
                 handler.postDelayed(this::controlaApp, 1000);
 
             }
